@@ -1,0 +1,22 @@
+{
+  "name": "hangman-node-cli",
+  "version": "1.0.0",
+  "description": "Hangman Game",
+  "main": "hangman.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ctbowden/hangman-node-cli.git"
+  },
+  "author": "Charles Bowden",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ctbowden/hangman-node-cli/issues"
+  },
+  "homepage": "https://github.com/ctbowden/hangman-node-cli#readme",
+  "dependencies": {
+    "inquirer": "^4.0.1"
+  }
+}
