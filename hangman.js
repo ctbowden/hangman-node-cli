@@ -7,28 +7,53 @@
 
 // NPM Dependencies
 var inquirer = require("inquirer");
+var fs = require("fs");
 
 // Imported objects
 var word = require("./word.js");
-var letter = require("./letter.js");
+var game = require("./game.js");
 
 var lives = 5;
 
-// While Loop to repeat Inquirer prompts? Until Victory or Defeat
-while (lives > 0){
-	inquirer.prompt([
+
+
+
+
+
+inquirer.prompt([
 	{
-		name: "letter",
-		message: "Welcome to Hangman! Choose a letter."
+		name: "play",
+		type: "confirm"
+		message: "Welcome to Hangman!  Choose Yes to continue"
+	},
+	{
+		name: "theme"
+		type: "list",
+		message: "Pick a theme, your Hangman Game will choose a word based on that theme",
+		choices: ["Pro Wrestlers", "Movies", "Songs"]
+	},
+	{
+		name: "difficulty",
+		type: "list",
+		chocies: ["Easy", "Hard", "Sudden Death"]
 	}
+
 	]).then(function(answers){
-		var someLetter = new Letter(answers.letter);
-	})
+		
+		var theme =  answers.theme;
+		var difficulty = answers.difficulty;
+
+		if (difficulty === "Easy")
+			
+		// Read in Text Files with Hangman Choices
+		fs.readFile("", "utf8", function(error, data){
+			if (error) {
+			return console.log(error);
+		}
+		//
+		var dataArr = data.split("\n");
+		//
+		})
 
 
-if (lives > 0) {
-	console.log("Congrats You're a Winner!");
-} else {
-	console.log("Sorry Try Again?");
-};
-
+})

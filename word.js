@@ -21,18 +21,30 @@ var Word = function(wrd){
 		});
 		return this.revealed;
 	};
-	// Take User Guesses and check the letterArray, if it exists flip that letter's value to true
+	// Take User Guesses and check the letterArray, if it exists flip that letter's value to true and if no letter was guessed return not found
 	this.checkLetter = function(userGuess){
 		// variable to hold user input and convert it to uppercase to handle errors
 		var inTheWord = userGuess.toUpperCase();
-
+		var count = 0;
 		for (var i = 0; i < this.letterArray.length; i++) {
 			if (this.letterArray[i].letter === inTheWord){
 				this.letterArray[i].appearsInWord = true;
-			}
-
+				count++;
+			};
+		};
+		if (count = 0){
+			console.log("Sorry that letter isn't in our word");
 		}
 	};
+	// Function to set "spacing" that has been pushed to the array as true boolean values to avoid users having to guess spacebar character to complete hangman game
+	this.removeSpaces = function(){
+		for (var i = 0; i < this.letterArray.length; i++) {
+			if (this.letterArray[i].letter === " "){
+				this.letterArray[i].appearsInWord = true; 
+			}
+		}
+	};
+
 
 };
 
