@@ -1,11 +1,10 @@
 // Letter Object
 
-var Letter = function(Letter) {
+var Letter = function(ltr) {
 	// Property to store the letter input
-	this.letter = letter;
-	this.printInfo = function() {
-		console.log(this.letter);
-	}
+	this.letter = ltr.toUpperCase();
+	// Sets a Boolean (default false) as to whether letter appears in our MysteryWord
+	this.appearsInWord = false;
 };
 
-module.exports = ;
+module.exports = Letter;
