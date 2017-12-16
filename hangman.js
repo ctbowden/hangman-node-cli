@@ -8,52 +8,65 @@
 // NPM Dependencies
 var inquirer = require("inquirer");
 var fs = require("fs");
+// var prompt = require("prompt");
 
 // Imported objects
-var word = require("./word.js");
-var game = require("./game.js");
-
-var lives = 5;
+var Word = require("./word.js");
+var Playhangman = require("./game.js");
 
 
+console.log("Welcome to Hangman!");
+console.log("-------------------");
 
 
+game = {
+	wordBank: ['Captain America', 'The Falcon', 'Iron Man', 'The Hulk'],
+	wordsWon: 0,
+	guessesRemaining: 10,
+	currentWrd: null,
 
-
-inquirer.prompt([
-	{
-		name: "play",
-		type: "confirm"
-		message: "Welcome to Hangman!  Choose Yes to continue"
+	startGame: function(wrd) {
+		this.resetGuesses();
+		this.currentWrd = new Word(this.wordBank[Math.floor(Math.random()* this.wordBank.length)]);
+		this.currentWrd.getLetters();
+		this.currentWrd.removeSpaces();
+		this.promptUser();
 	},
-	{
-		name: "theme"
-		type: "list",
-		message: "Pick a theme, your Hangman Game will choose a word based on that theme",
-		choices: ["Pro Wrestlers", "Movies", "Songs"]
+
+	resetGuesses: function(){
+		this.guessesRemaining = 10;
 	},
-	{
-		name: "difficulty",
-		type: "list",
-		chocies: ["Easy", "Hard", "Sudden Death"]
-	}
 
-	]).then(function(answers){
-		
-		var theme =  answers.theme;
-		var difficulty = answers.difficulty;
+	promptUser: function(){
+		if (this.currentWrd.revealed === false) {
 
-		if (difficulty === "Easy")
-			
-		// Read in Text Files with Hangman Choices
-		fs.readFile("", "utf8", function(error, data){
-			if (error) {
-			return console.log(error);
+			for (var i = 0; i < this.currentWrd.letterArray.length; i++) {
+				var string = [];
+				if (this.currentWrd.letterArray[i].show === true) {
+					string.push(this.currentWrd.letterArray[i].letter);
+				} else {
+					string.push("_");
+				}
+				console.log(string);
+			};
+		};
+
+			inquirer.prompt([
+				{
+					name: 'try',
+					type: 'input',
+					message: 'Choose a Letter to fill in the blanks.'
+				}
+				]).then(function(answers){
+
+					this.currentWrd.checkLetter(answers.try);
+					this.currentWrd.updateStatus();
+					promptUser();
+				});
+
+			this.currentWrd.updateStatus();
+			promptUser();
 		}
-		//
-		var dataArr = data.split("\n");
-		//
-		})
+}
 
-
-})
+game.startGame();

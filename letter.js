@@ -5,6 +5,8 @@ var Letter = function(ltr) {
 	this.letter = ltr.toUpperCase();
 	// Sets a Boolean (default false) as to whether letter appears in our MysteryWord
 	this.appearsInWord = false;
+	// Revealed
+	this.show = false;
 };
 
 module.exports = Letter;
